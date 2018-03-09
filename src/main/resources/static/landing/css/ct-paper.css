@@ -1463,8 +1463,10 @@ textarea.form-control {
 }
 
 .alert-danger {
-  background-color: #FF8F5E;
-  color: #B33C12;
+  /*background-color: #FF8F5E;*/
+  background-color: #556B2F;
+  color: #fffcf5;
+  /*color: #B33C12;*/
 }
 .alert-danger .close {
   color: #B33C12;

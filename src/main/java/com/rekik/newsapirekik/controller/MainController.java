@@ -173,7 +173,7 @@ public class MainController {
             for (Profile profile : categoryForUser) {
                 if (source.getCategory().equals(profile.getCategory())) {
 
-                    System.out.println(source.getCategory());
+                    /*System.out.println(source.getCategory());*/
 
                     profilematchingsources.add(source);
 
@@ -191,7 +191,7 @@ public class MainController {
         List<Profile> profiles = profileRepo.findByAppusersIn(appuser);
 
         for(Profile profile: profiles){
-            System.out.println(profile.getTopic());
+           /* System.out.println(profile.getTopic());*/
             topics.add(profile.getTopic());
         }
 

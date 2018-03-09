@@ -41,21 +41,34 @@
             <ul class="nav navbar-nav navbar-left">
 
 
-                <th:block sec:authorize="isAuthenticated()">
-                <li>
-                    <a class="btn btn-simple" href="/logout">Logout</a>
-                </li>
-                </th:block>
-
                 <th:block sec:authorize="isAnonymous()">
+                    <li>
+                        <a class="btn btn-simple" href="/">Top News Headlines</a>
+                    </li>
                     <li>
                         <a class="btn btn-simple" href="/register">Register</a>
                     </li>
 
-
                 <li>
                     <a class="btn btn-simple" href="/login">Login</a>
                 </li>
+                </th:block>
+
+                <th:block sec:authorize="isAuthenticated()">
+
+                    <li>
+                        <a class="btn btn-simple" href="/useraddtoprofile">Add Categories to get feeds</a>
+                    </li>
+                    <li>
+                        <a class="btn btn-simple" href="/addtopic">Add topic to get feeds</a>
+                    </li>
+                    <li>
+                        <a class="btn btn-simple" href="/newspertopic">Your customized News</a>
+                    </li>
+
+                    <li>
+                        <a class="btn btn-simple" href="/logout">Logout</a>
+                    </li>
                 </th:block>
 
             </ul>
@@ -93,39 +106,6 @@
 
 
 
-                            <table border="0" id="bootstrap-table" class="table table-hover">
-                                <thead>
-                                <tr>
-
-                                </tr>
-                                </thead>
-                                <tbody>
-
-                                <tr><td>Title</td><td>Lost item name</td><td>Lost item Description</td><td>Picture</td><td>User </td>
-                                    <th:block td sec:authorize="hasAuthority('ADMIN')">
-                                        <td>Lost Status</td>
-                                        <td>Change Status</td>
-                                        <!--
-                                                                            <td>Edit Status</td><td></td>
-                                        -->
-                                    </th:block>
-                                </tr>
-
-                                <tr th:each="article:${articloch}">
-                                    <td th:text="${article}">Item</td>
-
-                                    </td>
-
-
-
-                                        <td>  <a th:href="@{/edititem/{id}(id=${eachlost.id})}">Edit</a> </td>
-                                        <td>  <a th:href="@{/deleteitem/{id}(id=${eachlost.id})}">Delete</a></td>
-
-
-                                </tr>
-
-                            </table>
-
 
                         </div><div class="fixed-table-footer" style="display: none;"><table><tbody><tr></tr></tbody></table></div><div class="fixed-table-pagination"></div></div></div>
 
@@ -144,19 +124,20 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-4 column">
-                        <h4>First Attribute</h4>
-                        <p>Divide details about your product or agency work into parts. Write a few lines about each one. A paragraph describing a feature will be enough.</p>
-                        <a class="btn btn-danger btn-simple" href="#">See more <i class="fa fa-chevron-right"></i></a>
+                        <h4>Top Headlines</h4>
+                        <a class="btn btn-danger btn-simple" href="/">Top headlines </a>
                     </div>
                     <div class="col-md-4 column">
-                        <h4>Second Attribute</h4>
-                        <p>Divide details about your product or agency work into parts. Write a few lines about each one. A paragraph describing a feature will be enough.</p>
-                        <a class="btn btn-danger btn-simple" href="#">See more <i class="fa fa-chevron-right"></i></a>
+                        <h4>Add Categories</h4>
+                        <a class="btn btn-danger btn-simple" href="/useraddtoprofile">Add Categories to get feeds </a>
                     </div>
                     <div class="col-md-4 column">
-                        <h4>Third Attribute</h4>
-                        <p>Divide details about your product or agency work into parts. Write a few lines about each one. A paragraph describing a feature will be enough.</p>
-                        <a class="btn btn-danger btn-simple" href="#">See more <i class="fa fa-chevron-right"></i></a>
+                        <h4>Add Topics</h4>
+                        <a class="btn btn-danger btn-simple" href="/addtopic">Add topic to get feeds </a>
+                    </div>
+                    <div class="col-md-4 column">
+                        <h4>Customized News</h4>
+                        <a class="btn btn-danger btn-simple" href="/newspertopic">Your Customized News </a>
                     </div>
                 </div>
             </div>
@@ -179,13 +160,13 @@
             <ul>
 
                 <li>
-                    <a href="http://www.creative-tim.com">
-                        Creative Tim
+                    <a href="/">
+                        Top Headlines
                     </a>
                 </li>
                 <li>
-                    <a href="http://blog.creative-tim.com">
-                        Blog
+                    <a href="/">
+                        Top Headlines
                     </a>
                 </li>
                 <li>
@@ -196,7 +177,7 @@
             </ul>
         </nav>
         <div class="copyright pull-right">
-            © 2016, made with <i class="fa fa-heart heart"></i> by Creative Tim
+            © 2018, made with <i class="fa fa-heart heart"></i> by Rekik
         </div>
     </div>
 </footer>
