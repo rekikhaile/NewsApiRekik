@@ -222,6 +222,13 @@ public class MainController {
         return "usersownpage";
     }
 
+
+
+
+
+
+
+
     @RequestMapping("/removecat/{id}")
     public String deleteCat(@PathVariable("id") long id){
         profileRepo.deleteById(id);

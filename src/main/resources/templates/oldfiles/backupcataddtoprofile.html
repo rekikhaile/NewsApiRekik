@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+
+
+<form th:action="@{/useraddtoprofile}" th:method="post" th:object="${profile}">
+    <input type="hidden" th:field="*{id}">
+
+
+
+
+      <select id="topics" name="category" class="selectpicker">
+
+
+        <option th:each="category :${categories}" th:value="${category}" th:text="${category}" selected="selected"></option>
+
+        <input type="Submit" value="Select Category to save">
+    </select>
+    
+</form>
+
+</body>
+</html>
