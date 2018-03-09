@@ -64,21 +64,21 @@ public class DataLoader implements CommandLineRunner {
         //Create new users for the database
         System.out.println("Loading users into the application");
         AppUser user = new AppUser();
-        user.setPassword(passwordEncoder.encode("password"));
-        user.setUsername("newuser");
+        user.setPassword(passwordEncoder.encode("pass"));
+        user.setUsername("rekik");
         user.addRole(roleRepo.findAppRoleByRoleName("ADMIN"));
         user.addRole(roleRepo.findAppRoleByRoleName("USER"));
         userRepo.save(user);
 
         user = new AppUser();
-        user.setPassword(passwordEncoder.encode("password"));
-        user.setUsername("adminuser");
+        user.setPassword(passwordEncoder.encode("pass"));
+        user.setUsername("admin");
         user.addRole(roleRepo.findAppRoleByRoleName("ADMIN"));
         userRepo.save(user);
 
         user = new AppUser();
         user.setPassword(passwordEncoder.encode("password"));
-        user.setUsername("ordinaryuser");
+        user.setUsername("selam");
         user.addRole(roleRepo.findAppRoleByRoleName("USER"));
         userRepo.save(user);
 

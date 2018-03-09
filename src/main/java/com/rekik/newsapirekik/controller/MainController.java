@@ -93,7 +93,9 @@ public class MainController {
         Publishers publishers = restTemplate.getForObject
                 ("https://newsapi.org/v2/sources?apiKey=229cf848edc742dfa2fd35b816ef08e8", Publishers.class);
 
-        ArrayList<Source> sources = publishers.getSources();
+        //ArrayList<Source> sources = publishers.getSources();
+        List<Source> sources = publishers.getSources();
+
         Set<String> categories = new HashSet<>();
 
         for (Source source : sources) {
@@ -120,7 +122,8 @@ public class MainController {
         profile.addAppUser(appuser);
         profileRepo.save(profile);
 
-        return "usersownpage";
+        //return "usersownpage";
+        return "redirect:/newspertopic";
     }
 
 
@@ -143,7 +146,8 @@ public class MainController {
         profile.addAppUser(appUser);
         profileRepo.save(profile);
 
-        return "usersownpage";
+        //return "usersownpage";
+        return "redirect:/newspertopic";
 
 
     }
@@ -159,7 +163,7 @@ public class MainController {
 
         Publishers publishers = restTemplate.getForObject("https://newsapi.org/v2/sources?apiKey=229cf848edc742dfa2fd35b816ef08e8", Publishers.class);
 
-        //TopHeadline allarticlesinteresting = restTemplate.getForObject("https://newsapi.org/v2/top-headlines?country=us&q=java&apiKey=229cf848edc742dfa2fd35b816ef08e8", TopHeadline.class);
+        //TopHeadline allarticlesinteresting = restTemplate.getForObject("https://newsapi.org/v2/top-headlines?q=bitcoin&apiKey=229cf848edc742dfa2fd35b816ef08e8", TopHeadline.class);
 
         List<Source> sources = publishers.getSources();
         List<Source> profilematchingsources = new ArrayList<>();
@@ -178,6 +182,7 @@ public class MainController {
             }
         }
 
+
         model.addAttribute("categoryforuser", categoryForUser);
         model.addAttribute("profilematchingsources", profilematchingsources);
 
@@ -195,11 +200,22 @@ public class MainController {
 
         List<TopHeadline> topHeadlines = new ArrayList<>();
 
-        for (String topic :
+       /* for (String topic :
                 topics) {
             topHeadlines.add(restTemplate.getForObject
-                    ("https://newsapi.org/v2/top-headlines?q="+topic+"&country=us&apiKey=229cf848edc742dfa2fd35b816ef08e8", TopHeadline.class));
+                    ("https://newsapi.org/v2/top-headlines?q=\"+topic+\"&apiKey=229cf848edc742dfa2fd35b816ef08e8", TopHeadline.class));
+        }*/
+
+        for (String topic :
+                topics) {
+            topHeadlines.add(restTemplate.getForObject("https://newsapi.org/v2/top-headlines?q="+topic+"&apiKey=229cf848edc742dfa2fd35b816ef08e8", TopHeadline.class));
         }
+
+       /* System.out.println("Riri checking sources matching profiles");
+        for(int i=0; i<topHeadlines.size();i++){
+            topHeadlines
+
+        }*/
 
         model.addAttribute("topheadlines", topHeadlines);
 

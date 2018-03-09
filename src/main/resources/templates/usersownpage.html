@@ -6,9 +6,9 @@
 </head>
 <body>
 <a href="/">Click here for top news stories</a>
-<a href="/useraddtoprofile">Click here to add categories interests you</a>
-<a href="/addtopic">Click here to add topics interests you</a>
-<a href="/newspertopic">Click here to see news per topic selected in your profile</a>
+<a href="/useraddtoprofile">Add categories to get feeds from</a>
+<a href="/addtopic">Add your own topic to get feed with</a>
+<a href="/newspertopic">News per topic selected in your profile</a>
 
 
  <!--list of categories -->
@@ -18,14 +18,14 @@
     <tr>
 
         <th scope="col">Category Name</th>
-        <th scope="col">Click here to remove Category</th>
+        <th scope="col">Remove Category</th>
     </tr>
     </thead>
     <tbody>
     <tr  th:each="category : ${categoryforuser}">
 
         <td  th:if="${category.category !=null}" th:text="${category.category}"></td>
-        <td th:if="${category.category !=null}" th:inline="text"><a th:inline="text" th:href="@{/removecat/{id}(id=${category.id})}">[[${category.category}]]</a></td>
+        <td th:if="${category.category !=null}" th:inline="text"><a th:inline="text" th:href="@{/removecat/{id}(id=${category.id})}">Remove category [[${category.category}]]</a></td>
 
     </tr>
 
@@ -63,6 +63,7 @@
     <thead>
     <tr>
 
+        <th scope="col">Status</th>
         <th scope="col">Topic Selected</th>
         <th scope="col">Url to The news</th>
         <th scope="col">Detail  of  The news</th>
@@ -71,13 +72,10 @@
     </thead>
     <tbody th:each="topheadline : ${topheadlines}">
     <tr  th:each="article: ${topheadline.getArticles()}">
-
+        <td th:text="${topheadline.status}"></td>
             <td th:text="${article.title}"></td>
-            <td th:text="${article.url}"></td>
+        <td><a th:href="${article.url}">Link</a></td>
             <td th:text="${article.description}"></td>
-
-
-
 
     </tr>
 

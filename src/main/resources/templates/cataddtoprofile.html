@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
     <title>Title</title>
@@ -18,7 +18,7 @@
 
         <option th:each="category :${categories}" th:value="${category}" th:text="${category}" selected="selected"></option>
 
-        <input type="Submit" value="Add Interested category">
+        <input type="Submit" value="Select Category to save">
     </select>
     
 </form>
