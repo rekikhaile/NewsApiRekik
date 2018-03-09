@@ -14,7 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-//@Configuration
+@Configuration
 @EnableWebSecurity
 //@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -36,13 +36,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
-        PasswordEncoder pE = passwordEncoder();
-        auth.inMemoryAuthentication().withUser("username").password(pE.encode("password")).authorities("USER")
-                .and().withUser("admin").password(pE.encode("password")).authorities("ADMIN");
-        auth.userDetailsService(userDetailsServiceBean());
+      //  PasswordEncoder pE = passwordEncoder();
+//        auth.inMemoryAuthentication().withUser("username").password(pE.encode("password")).authorities("USER")
+//                .and().withUser("admin").password(pE.encode("password")).authorities("ADMIN");
+//        auth.userDetailsService(userDetailsServiceBean());
 
-        /*//Allows database authentication
-        auth.userDetailsService(userDetailsServiceBean()).passwordEncoder(encoder());*/
+        //Allows database authentication
+        auth.userDetailsService(userDetailsServiceBean()).passwordEncoder( passwordEncoder());
     }
 
     @Override
@@ -82,7 +82,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
     }
-    /*@Override
+   /* @Override
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception{
 
@@ -92,8 +92,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .withUser("username").password("pass").authorities("ADMIN");
         auth
                 .userDetailsService(userDetailsServiceBean());
-    }*/
-
+    }
+*/
 
 
 

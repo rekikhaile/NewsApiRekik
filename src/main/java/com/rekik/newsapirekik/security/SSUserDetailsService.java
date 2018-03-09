@@ -25,10 +25,10 @@ public class SSUserDetailsService implements UserDetailsService {
         this.appUserRepo=appUserRepo;
     }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+//    @Bean
+//    public PasswordEncoder passwordEncoder() {
+//        return new BCryptPasswordEncoder();
+//    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -39,10 +39,16 @@ public class SSUserDetailsService implements UserDetailsService {
                throw new UsernameNotFoundException("Invalid username or password");
                // return null;
             }
-            return new org.springframework.security.core.userdetails.User(
-                    thisUser.getUsername(),
-                    thisUser.getPassword(),
-                    getAuthorities(thisUser));
+            else {
+
+                System.out.println(thisUser.getUsername());
+                System.out.println(thisUser.getPassword());
+                System.out.println(thisUser.getRoles());
+                return new org.springframework.security.core.userdetails.User(
+                        thisUser.getUsername(),
+                        thisUser.getPassword(),
+                        getAuthorities(thisUser));
+            }
         } catch (Exception e) {
             throw new UsernameNotFoundException("user not found");
 
@@ -50,7 +56,7 @@ public class SSUserDetailsService implements UserDetailsService {
 
     }
     private Set<GrantedAuthority> getAuthorities (AppUser user){
-        Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
+        Set<GrantedAuthority> authorities = new HashSet<>();
         for (AppRole appRole : user.getRoles()) {
             GrantedAuthority grantedAuthority
                     = new SimpleGrantedAuthority(appRole.getRoleName());

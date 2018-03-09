@@ -32,17 +32,17 @@ public class AppUser {
     @Transient //Equivalent to an ignore statement
     private PasswordEncoder encoder;
 
-
-    @Transient //Equivalent to an ignore statement
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+//
+//    @Transient //Equivalent to an ignore statement
+//    @Bean
+////    public PasswordEncoder passwordEncoder() {
+////        return new BCryptPasswordEncoder();
+////    }
 
     public AppUser() {
         this.roles=new HashSet<>();
         this.profiles = new HashSet<>();
-        encoder = passwordEncoder();
+       // encoder = passwordEncoder();
     }
 
     public AppUser( String username, @NotNull String password, AppRole role) {
@@ -50,7 +50,7 @@ public class AppUser {
         this.roles = new HashSet<>();
         this.profiles = new HashSet<>();
         addRole(role);
-        encoder = passwordEncoder();
+      //  encoder = passwordEncoder();
         setPassword(password);
     }
 
@@ -84,7 +84,9 @@ public class AppUser {
 
     public void setPassword(String password) {
 
-        this.password = encoder.encode(password);
+
+        this.password=password;
+        //this.password = encoder.encode(password);
         System.out.println("Password:"+this.password);
     }
 
