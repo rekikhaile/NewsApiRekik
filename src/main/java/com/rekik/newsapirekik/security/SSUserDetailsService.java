@@ -36,8 +36,8 @@ public class SSUserDetailsService implements UserDetailsService {
         try {
             AppUser thisUser = appUserRepo.findAppUserByUsername(username);
             if (thisUser == null) {
-              // throw new UsernameNotFoundException("Invalid username or password");
-                return null;
+               throw new UsernameNotFoundException("Invalid username or password");
+               // return null;
             }
             return new org.springframework.security.core.userdetails.User(
                     thisUser.getUsername(),

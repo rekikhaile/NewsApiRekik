@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+
+
+<form th:action="@{/useraddtoprofile}" th:method="post" th:object="${profile}">
+    <input type="hidden" th:field="*{id}">
+
+
+    Topic <input type="text" th:field="*{topic}">
+
+
+
+    <input type="Submit" value="Save Topic of Interest">
+</form>
+
+</body>
+</html>

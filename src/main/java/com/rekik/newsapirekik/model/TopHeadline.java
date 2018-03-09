@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.ArrayList;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class NewsRoot
+public class TopHeadline
 {
     private String status;
 
@@ -38,7 +38,7 @@ public class NewsRoot
 
     @Override
     public String toString() {
-        return "NewsRoot{" +
+        return "TopHeadline{" +
                 "status='" + status + '\'' +
                 ", totalResults=" + totalResults +
                 ", articles=" + articles +

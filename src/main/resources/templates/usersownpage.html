@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+</head>
+<body>
+<a href="/">Click here for top news stories</a>
+<a href="/useraddtoprofile">Click here to add categories interests you</a>
+<a href="/addtopic">Click here to add topics interests you</a>
+<a href="/newspertopic">Click here to see news per topic selected in your profile</a>
+
+
+ <!--list of categories -->
+
+<table class="table">
+    <thead>
+    <tr>
+
+        <th scope="col">Category Name</th>
+        <th scope="col">Click here to remove Category</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr  th:each="category : ${categoryforuser}">
+
+        <td  th:if="${category.category !=null}" th:text="${category.category}"></td>
+        <td th:if="${category.category !=null}" th:inline="text"><a th:inline="text" th:href="@{/removecat/{id}(id=${category.id})}">[[${category.category}]]</a></td>
+
+    </tr>
+
+    </tbody>
+</table>
+
+<!--category detail-->
+<table class="table">
+    <thead>
+    <tr>
+
+        <th scope="col">Category Selected</th>
+        <th scope="col">Url to The news</th>
+        <th scope="col">Detail  of  The news</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr  th:each="source : ${profilematchingsources}">
+
+        <td th:text="${source.category}"></td>
+        <td th:inline="text"> <a th:href="${source.url}"  target="_blank">[[${source.url}]] </a></td>
+        <td th:text="${source.description}"></td>
+
+
+    </tr>
+
+    </tbody>
+</table>
+
+
+<!--with topics selected-->
+
+<table class="table">
+    <thead>
+    <tr>
+
+        <th scope="col">Topic Selected</th>
+        <th scope="col">Url to The news</th>
+        <th scope="col">Detail  of  The news</th>
+
+    </tr>
+    </thead>
+    <tbody th:each="topheadline : ${topheadlines}">
+    <tr  th:each="article: ${topheadline.getArticles()}">
+
+            <td th:text="${article.title}"></td>
+            <td th:text="${article.url}"></td>
+            <td th:text="${article.description}"></td>
+
+
+
+
+    </tr>
+
+    </tbody>
+</table>
+</body>
+</html>

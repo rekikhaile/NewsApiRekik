@@ -28,7 +28,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private AppUserRepo appUserRepo;
 
-    @Override
+    @Bean
     public UserDetailsService userDetailsServiceBean() throws Exception {
         return new SSUserDetailsService(appUserRepo);
     }
@@ -40,13 +40,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         auth.inMemoryAuthentication().withUser("username").password(pE.encode("password")).authorities("USER")
                 .and().withUser("admin").password(pE.encode("password")).authorities("ADMIN");
         auth.userDetailsService(userDetailsServiceBean());
+
+        /*//Allows database authentication
+        auth.userDetailsService(userDetailsServiceBean()).passwordEncoder(encoder());*/
     }
-
-
-
-
-
-
 
     @Override
     protected void configure(HttpSecurity http) throws Exception{
@@ -57,13 +54,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
 
                 //allow to all
-                .antMatchers("/", "/imgriri/**",  "/test/**","/displayuserlist","/h2-console/**","/register","/css/**",
-                        "/sass/**","/js/**","/img/**","/fonts/**","/landing/**","/bootstrap3/**","/searchbycategory").permitAll()
+                .antMatchers("/", "/imgriri/**",  "/test/**","/h2-console/**","/register","/css/**",
+                        "/sass/**","/js/**","/img/**","/fonts/**","/landing/**","/bootstrap3/**").permitAll()
                 //allowed only to recruiter
-                .antMatchers("/listlosts","/addlost", "/lostitem/**", "/edititem/**", "/deleteitem/**").hasAuthority("ADMIN")
+                //.antMatchers("/listlosts","/addlost", "/lostitem/**", "/edititem/**", "/deleteitem/**").hasAuthority("ADMIN")
                 //allowed to User and Admin
-                //.antMatchers("/useraddlost").access("hasAuthority('ADMIN') or hasAuthority('USER')")
-                .antMatchers("/useraddlost"). hasAuthority("USER")
+                .antMatchers("/useraddtoprofile","/addtopic","/newspertopic","/removecat/**").access("hasAuthority('ADMIN') or hasAuthority('USER')")
+                //.antMatchers("/useraddlost"). hasAuthority("USER")
 
                 .anyRequest().authenticated()
                 .and()

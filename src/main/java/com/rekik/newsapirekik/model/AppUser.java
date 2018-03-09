@@ -1,5 +1,6 @@
 package com.rekik.newsapirekik.model;
 
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,35 +16,18 @@ public class AppUser {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private String image;
-
     @NotNull
-    @Column(unique = true)
     private String username;
 
     @NotNull
     private String password;
 
-    private String firstName;
-
-    private String lastName;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    //This needs to be instantiated in the construtor so you can use it to add and remove individual roles
+    @ManyToMany()
     private Set<AppRole> roles;
 
-    /*@ManyToMany(mappedBy = "lusers")
-    private Set<LostItem> losts;*/
 
-    /*@ManyToMany(mappedBy = "lusers")
-    private Set<LostItem> losts;*/
-
-    //own method
-    public void addRole(AppRole role)
-    {
-        this.roles.add(role);
-    }
-
+    @ManyToMany(mappedBy = "appusers")
+    private Set<Profile> profiles;
 
     @Transient //Equivalent to an ignore statement
     private PasswordEncoder encoder;
@@ -56,29 +40,27 @@ public class AppUser {
     }
 
     public AppUser() {
-        this.roles = new HashSet<>();
+        this.roles=new HashSet<>();
+        this.profiles = new HashSet<>();
         encoder = passwordEncoder();
     }
 
-    public AppUser(String username, String password, AppRole role) {
+    public AppUser( String username, @NotNull String password, AppRole role) {
         this.username = username;
         this.roles = new HashSet<>();
+        this.profiles = new HashSet<>();
         addRole(role);
         encoder = passwordEncoder();
         setPassword(password);
-
     }
 
-
-/*
-    public AppUser() {
-        this.roles = new HashSet<>();
-        */
-/*this.losts = new HashSet<>();// check*//*
-
+    public Set<Profile> getProfiles() {
+        return profiles;
     }
-*/
 
+    public void setProfiles(Set<Profile> profiles) {
+        this.profiles = profiles;
+    }
 
     public long getId() {
         return id;
@@ -86,14 +68,6 @@ public class AppUser {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
     }
 
     public String getUsername() {
@@ -114,28 +88,24 @@ public class AppUser {
         System.out.println("Password:"+this.password);
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
     public Set<AppRole> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<AppRole> appRoles) {
-        this.roles = appRoles;
+    public void setRoles(Set<AppRole> roles) {
+        this.roles = roles;
     }
 
+    public void addRole(AppRole role)
+    {
+        this.roles.add(role);
     }
+
+    /*public PasswordEncoder getEncoder() {
+        return encoder;
+    }
+
+    public void setEncoder(PasswordEncoder encoder) {
+        this.encoder = encoder;
+    }*/
+}

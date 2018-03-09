@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+
+<a href="/register">Register</a>
+<a href="/login">login to Get news that interest you</a>
+
+
+
+
+
+<table class="table">
+    <thead>
+    <tr>
+
+        <th scope="col">News Title</th>
+        <th scope="col">News Description</th>
+        <th scope="col">News Url</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr  th:each="article : ${topheadlinearticles}">
+
+        <td th:text="${article.title}"></td>
+        <td th:text="${article.description}"></td>
+        <td th:inline="text"> <a th:href="${article.url}"  target="_blank">[[${article.url}]] </a></td>
+
+    </tr>
+
+    </tbody>
+</table>
+
+
+</body>
+</html>

@@ -13,7 +13,8 @@ public class Article
     private String description;
     private String url;
     private String urlToImage;
-    private Date publishedAt;
+//    private Date publishedAt;
+    private String publishedAt;
 
     public Source getSource() {
         return source;
@@ -63,11 +64,11 @@ public class Article
         this.urlToImage = urlToImage;
     }
 
-    public Date getPublishedAt() {
+    public String getPublishedAt() {
         return publishedAt;
     }
 
-    public void setPublishedAt(Date publishedAt) {
+    public void setPublishedAt(String publishedAt) {
         this.publishedAt = publishedAt;
     }
 
